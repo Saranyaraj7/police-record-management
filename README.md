@@ -1,2 +1,43 @@
 # police-record-management
 A Police Record Management System using Oracle SQL.
+# 🚓 Police Record Management System (Oracle SQL)
+
+## 📌 Project Overview
+A Police Record Management System (PRMS) designed to manage and analyze crime-related data using Oracle SQL. It supports police operations by storing and querying information about suspects, crimes, arrests, officers, and more.
+
+## 👩‍💻 Developer
+**Name:** Saranya Selvaraj  
+**Subject:** Oracle SQL Project
+
+## 🛠️ Tools Used
+- Oracle SQL
+- SQL Developer
+
+## 🧱 Database Structure
+
+### 📁 Tables:
+- **Name:** Stores people involved (suspects, victims, witnesses)
+- **Crime:** Holds information about crimes
+- **Station:** Police station details
+- **Officer:** Officer information
+- **Location:** Where the crime happened
+- **Witness:** Witness details and statements
+- **Arrest:** Arrest records (parent table)
+
+## 🔎 Example Queries
+```sql
+-- Crimes in March 2024
+SELECT * FROM Crime WHERE EXTRACT(MONTH FROM CrimeDate) = 3 AND EXTRACT(YEAR FROM CrimeDate) = 2024;
+
+-- Officers in Chennai Central Station
+SELECT OfficerName FROM Officer 
+JOIN Station ON Officer.StationID = Station.StationID 
+WHERE StationName = 'Chennai Central';
+
+-- Arrest details
+SELECT A.ArrestDate, N.FullName, C.CrimeType, O.OfficerName
+FROM Arrest A
+JOIN Name N ON A.NameID = N.NameID
+JOIN Crime C ON A.CrimeID = C.CrimeID
+JOIN Officer O ON A.OfficerID = O.OfficerID;
+
